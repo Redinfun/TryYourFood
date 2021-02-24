@@ -1,152 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_recipesRow_layout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.card.MaterialCardView
+    <data>
+        <variable
+            name="result"
+            type="br.com.tryyourfood.model.Result" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_recipesRow_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/lightMediumGray"
-        app:strokeWidth="1dp">
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/lightMediumGray"
+            app:strokeWidth="1dp">
 
-            <ImageView
-                android:id="@+id/image_recipesRow_id"
-                android:layout_width="180dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
-            <TextView
-                android:id="@+id/title_recipesRow_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:ellipsize="marquee"
-                android:fontFamily="@font/courgette"
-                android:maxLines="2"
-                android:padding="4dp"
-                android:text="TextView"
-                android:textColor="@color/darker"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/image_recipesRow_id"
-                app:layout_constraintTop_toTopOf="@+id/image_recipesRow_id" />
+                <ImageView
+                    android:id="@+id/image_recipesRow_id"
+                    android:layout_width="180dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
-                android:id="@+id/description_recipesRow_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                <TextView
+                    android:id="@+id/title_recipesRow_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/courgette"
+                    android:maxLines="2"
+                    android:padding="4dp"
+                    android:text="TextView"
+                    android:textColor="@color/darker"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/image_recipesRow_id"
+                    app:layout_constraintTop_toTopOf="@+id/image_recipesRow_id" />
 
-                android:ellipsize="marquee"
-                android:maxLines="4"
-                android:text="https://zonaoestemais-release.azurewebsites.net//PDATecnicoWS/wspdatecnico.asmx"
-                android:textColor="@color/darkGray"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/title_recipesRow_id"
-                app:layout_constraintTop_toBottomOf="@+id/title_recipesRow_id" />
+                <TextView
+                    android:id="@+id/description_recipesRow_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/image_recipesRow_id"
-                app:layout_constraintStart_toStartOf="@+id/description_recipesRow_id"
-                app:layout_constraintTop_toBottomOf="@+id/description_recipesRow_id"
-                app:layout_constraintVertical_bias="0.47000003"
-                app:srcCompat="@drawable/ic_favorite_black"
-                app:tint="@color/red" />
+                    android:ellipsize="marquee"
+                    android:maxLines="4"
+                    android:text="https://zonaoestemais-release.azurewebsites.net//PDATecnicoWS/wspdatecnico.asmx"
+                    android:textColor="@color/darkGray"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/title_recipesRow_id"
+                    app:layout_constraintTop_toBottomOf="@+id/title_recipesRow_id" />
 
-            <TextView
-                android:id="@+id/qtdLike_itemRecipes_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:text="100"
-                android:textAlignment="center"
-                android:textColor="@color/red"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                app:layout_constraintStart_toStartOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_recipesRow_id"
+                    app:layout_constraintStart_toStartOf="@+id/description_recipesRow_id"
+                    app:layout_constraintTop_toBottomOf="@+id/description_recipesRow_id"
+                    app:layout_constraintVertical_bias="0.47000003"
+                    app:srcCompat="@drawable/ic_favorite_black"
+                    app:tint="@color/red" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                app:layout_constraintStart_toEndOf="@+id/qtdLike_itemRecipes_id"
-                app:layout_constraintTop_toTopOf="@+id/imageView2"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_time_clock_full_black"
-                app:tint="@color/yellow" />
+                <TextView
+                    android:id="@+id/qtdLike_itemRecipes_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:text="100"
+                    android:textAlignment="center"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="@+id/imageView2"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-            <TextView
-                android:id="@+id/qtdTime_itemRecipes_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100"
-                android:textColor="@color/yellow"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="@+id/qtdLike_itemRecipes_id"
-                app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                app:layout_constraintStart_toStartOf="@+id/imageView3" />
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintStart_toEndOf="@+id/qtdLike_itemRecipes_id"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:srcCompat="@drawable/ic_time_clock_full_black"
+                    app:tint="@color/yellow" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                <TextView
+                    android:id="@+id/qtdTime_itemRecipes_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"
+                    android:textColor="@color/yellow"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/qtdLike_itemRecipes_id"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                    app:layout_constraintStart_toStartOf="@+id/imageView3" />
 
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintStart_toEndOf="@+id/qtdTime_itemRecipes_id"
-                app:layout_constraintTop_toTopOf="@+id/imageView3"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_eco_black"
-                app:tint="@color/green" />
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
 
-            <TextView
-                android:id="@+id/qtdHealth_itemRecipes_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100"
-                android:textColor="@color/green"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="@+id/qtdTime_itemRecipes_id"
-                app:layout_constraintEnd_toEndOf="@+id/imageView4"
-                app:layout_constraintHorizontal_bias="0.529"
-                app:layout_constraintStart_toStartOf="@+id/imageView4" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                    app:layout_constraintStart_toEndOf="@+id/qtdTime_itemRecipes_id"
+                    app:layout_constraintTop_toTopOf="@+id/imageView3"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:srcCompat="@drawable/ic_eco_black"
+                    app:tint="@color/green" />
 
-    </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/qtdHealth_itemRecipes_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/qtdTime_itemRecipes_id"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                    app:layout_constraintHorizontal_bias="0.529"
+                    app:layout_constraintStart_toStartOf="@+id/imageView4" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
