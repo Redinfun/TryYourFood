@@ -1,5 +1,6 @@
-package br.com.tryyourfood
+package br.com.tryyourfood.data
 
+import br.com.tryyourfood.data.network.FoodRecipesApi
 import br.com.tryyourfood.model.FoodRecipe
 import retrofit2.Response
 import javax.inject.Inject

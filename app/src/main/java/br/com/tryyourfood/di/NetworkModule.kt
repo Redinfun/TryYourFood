@@ -1,6 +1,6 @@
 package br.com.tryyourfood.di
 
-import br.com.tryyourfood.FoodRecipesApi
+import br.com.tryyourfood.data.network.FoodRecipesApi
 import br.com.tryyourfood.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -47,7 +47,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit):FoodRecipesApi{
+    fun provideApiService(retrofit: Retrofit): FoodRecipesApi {
         return retrofit.create(FoodRecipesApi::class.java)
     }
 }
