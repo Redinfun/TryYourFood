@@ -1,4 +1,4 @@
-package br.com.tryyourfood
+package br.com.tryyourfood.viewmodel
 
 import android.app.Application
 import android.content.Context
@@ -13,11 +13,13 @@ import androidx.lifecycle.viewModelScope
 import br.com.tryyourfood.data.repository.Repository
 import br.com.tryyourfood.model.FoodRecipe
 import br.com.tryyourfood.utils.NetworkResult
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
 
-@RequiresApi(Build.VERSION_CODES.M)
+
+
 class MainViewModel @ViewModelInject constructor(
     application: Application,
     private val repository: Repository
@@ -29,6 +31,7 @@ class MainViewModel @ViewModelInject constructor(
         getRecipesSafeCall(queries)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
         recipesResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {
@@ -43,7 +46,7 @@ class MainViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
+    private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe> {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")
@@ -54,6 +57,7 @@ class MainViewModel @ViewModelInject constructor(
             }
 
             response.body()!!.results.isNullOrEmpty() -> {
+
                 return NetworkResult.Error("Recipes not Found")
             }
 
@@ -68,6 +72,7 @@ class MainViewModel @ViewModelInject constructor(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun hasInternetConnection(): Boolean {
         val connectivityManager = getApplication<Application>()
             .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
