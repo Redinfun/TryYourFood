@@ -8,4 +8,5 @@
 
     <!-- Recipes fragment -->
     <string name="no_internet_connection_my_young_user">No Internet Connection My Young User</string>
+    <string name="vegan">Vegan</string>
 </resources>

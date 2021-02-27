@@ -25,7 +25,7 @@
         android:id="@+id/bottomNavigationView_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green"
+        android:background="@color/colorPrimaryDark"
         app:itemHorizontalTranslationEnabled="true"
         app:itemIconTint="@color/white"
         app:itemRippleColor="@color/colorPrimaryDark"
