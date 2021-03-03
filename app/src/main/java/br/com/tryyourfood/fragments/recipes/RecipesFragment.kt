@@ -2,20 +2,24 @@ package br.com.tryyourfood.fragments.recipes
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tryyourfood.R
 import br.com.tryyourfood.adapter.RecipesAdapter
 import br.com.tryyourfood.utils.NetworkResult
+import br.com.tryyourfood.utils.observeOnce
 import br.com.tryyourfood.viewmodel.MainViewModel
 import br.com.tryyourfood.viewmodel.RecipesViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_recipes.view.*
+import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.M)
 class RecipesFragment : Fragment() {
@@ -40,12 +44,28 @@ class RecipesFragment : Fragment() {
         mView = inflater.inflate(R.layout.fragment_recipes, container, false)
 
         setupRecyclerView()
-        requestApiData()
+        readDatabase()
         return mView
+    }
+
+    private fun readDatabase() {
+
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
+                if (database.isNotEmpty()) {
+                    mAdapter.setData(database[0].foodRecipe)
+                    hideShimmer()
+                    Log.i("TAG", "readDatabase: ")
+                } else {
+                    requestApiData()
+                }
+            })
+        }
     }
 
 
     private fun requestApiData() {
+        Log.i("TAG", "requestApiData: ")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
 
@@ -56,7 +76,7 @@ class RecipesFragment : Fragment() {
                 }
                 is NetworkResult.Error -> {
                     hideShimmer()
-                    //Toast.makeText(requireContext(),response.message,Toast.LENGTH_SHORT).show()
+                    loadDataFromCache()
                     Snackbar.make(mView, response.message.toString(), Snackbar.LENGTH_LONG).show()
                 }
 
@@ -65,6 +85,16 @@ class RecipesFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun loadDataFromCache() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+                if (database.isNotEmpty()) {
+                    mAdapter.setData(database[0].foodRecipe)
+                }
+            })
+        }
     }
 
 

@@ -21,4 +21,8 @@ object DatabaseModule {
         RecipesDatabase::class.java,
         RECIPES_DATABASE_NAME
     ).build()
+
+    @Singleton
+    @Provides
+    fun provideDao(database: RecipesDatabase) = database.recipesDao()
 }

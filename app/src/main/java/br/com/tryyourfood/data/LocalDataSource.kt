@@ -1,6 +1,6 @@
 package br.com.tryyourfood.data
 
-import br.com.tryyourfood.dao.RecipesDao
+import br.com.tryyourfood.data.database.dao.RecipesDao
 import br.com.tryyourfood.data.database.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

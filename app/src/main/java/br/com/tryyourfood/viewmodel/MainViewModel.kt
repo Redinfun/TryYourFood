@@ -45,15 +45,15 @@ class MainViewModel @ViewModelInject constructor(
         recipesResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {
             try {
-
+                val response = repository.remote.getRecipes(queries)
+                recipesResponse.value = handleFoodRecipesResponse(response)
                 //caching data
                     val foodRecipe = recipesResponse.value!!.data
                     if (foodRecipe != null){
                         offlineCacheRecipes(foodRecipe)
                     }
 
-                val response = repository.remote.getRecipes(queries)
-                recipesResponse.value = handleFoodRecipesResponse(response)
+
             }catch (e:Exception){
                 recipesResponse.value = NetworkResult.Error("No Internet Connection")
             }

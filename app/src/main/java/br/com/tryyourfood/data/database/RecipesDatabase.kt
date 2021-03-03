@@ -3,7 +3,7 @@ package br.com.tryyourfood.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import br.com.tryyourfood.dao.RecipesDao
+import br.com.tryyourfood.data.database.dao.RecipesDao
 import br.com.tryyourfood.data.database.entities.RecipesEntity
 import br.com.tryyourfood.utils.RecipesTypeConverter
 

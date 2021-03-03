@@ -1,4 +1,4 @@
-package br.com.tryyourfood.dao
+package br.com.tryyourfood.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
