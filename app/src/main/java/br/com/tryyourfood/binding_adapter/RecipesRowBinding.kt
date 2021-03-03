@@ -42,9 +42,10 @@ class RecipesRowBinding {
 
         @BindingAdapter("loadImageFromUrl")
         @JvmStatic
-        fun loadImageFromUrl(imageView: ImageView,imageUrl:String){
-            imageView.load(imageUrl){
+        fun loadImageFromUrl(imageView: ImageView, imageUrl: String) {
+            imageView.load(imageUrl) {
                 crossfade(600)
+                error(R.drawable.error_placeholder)
 
             }
 

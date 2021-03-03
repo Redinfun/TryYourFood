@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.tryyourfood.R
 import br.com.tryyourfood.adapter.RecipesAdapter
+import br.com.tryyourfood.databinding.FragmentRecipesBinding
 import br.com.tryyourfood.utils.NetworkResult
 import br.com.tryyourfood.utils.observeOnce
 import br.com.tryyourfood.viewmodel.MainViewModel
@@ -24,7 +24,9 @@ import kotlinx.coroutines.launch
 @RequiresApi(Build.VERSION_CODES.M)
 class RecipesFragment : Fragment() {
 
-    private lateinit var mView: View
+    private var _binding: FragmentRecipesBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
@@ -40,12 +42,16 @@ class RecipesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_recipes, container, false)
+        _binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
 
         setupRecyclerView()
         readDatabase()
-        return mView
+        return binding.root
     }
 
     private fun readDatabase() {
@@ -77,7 +83,8 @@ class RecipesFragment : Fragment() {
                 is NetworkResult.Error -> {
                     hideShimmer()
                     loadDataFromCache()
-                    Snackbar.make(mView, response.message.toString(), Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root, response.message.toString(), Snackbar.LENGTH_LONG)
+                        .show()
                 }
 
                 is NetworkResult.Loading -> {
@@ -99,18 +106,23 @@ class RecipesFragment : Fragment() {
 
 
     private fun showShimmerEffect() {
-        mView.shimmer_recyclerView_recipesFragment_id.showShimmer()
+        binding.root.shimmer_recyclerView_recipesFragment_id.showShimmer()
     }
 
     private fun hideShimmer() {
-        mView.shimmer_recyclerView_recipesFragment_id.hideShimmer()
+        binding.root.shimmer_recyclerView_recipesFragment_id.hideShimmer()
     }
 
     private fun setupRecyclerView() {
-        mView.shimmer_recyclerView_recipesFragment_id.adapter = mAdapter
-        mView.shimmer_recyclerView_recipesFragment_id.layoutManager =
+        binding.root.shimmer_recyclerView_recipesFragment_id.adapter = mAdapter
+        binding.root.shimmer_recyclerView_recipesFragment_id.layoutManager =
             LinearLayoutManager(requireContext())
         showShimmerEffect()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

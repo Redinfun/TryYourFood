@@ -13,6 +13,6 @@ interface RecipesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipe(recipesEntity: RecipesEntity)
 
-    @Query("SELECT * FROM recipes_table ORDER BY id")
+    @Query("SELECT * FROM recipes_table ORDER BY id DESC")
     fun readRecipes(): Flow<List<RecipesEntity>>
 }
