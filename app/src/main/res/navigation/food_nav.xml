@@ -9,7 +9,11 @@
         android:id="@+id/recipesFragment_nav_id"
         android:name="br.com.tryyourfood.fragments.recipes.RecipesFragment"
         android:label="Recipes"
-        tools:layout="@layout/fragment_recipes" />
+        tools:layout="@layout/fragment_recipes" >
+        <action
+            android:id="@+id/action_recipesFragment_nav_id_to_recipeBottomSheet"
+            app:destination="@id/recipeBottomSheet" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment_nav_id"
         android:name="br.com.tryyourfood.fragments.favorite.FavoriteRecipesFragment"
@@ -20,4 +24,13 @@
         android:name="br.com.tryyourfood.fragments.joke.FoodJokeFragment"
         android:label="Food Joke"
         tools:layout="@layout/fragment_food_joke" />
+    <dialog
+        android:id="@+id/recipeBottomSheet"
+        android:name="br.com.tryyourfood.fragments.recipes.bottomsheet.RecipeBottomSheet"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" >
+        <action
+            android:id="@+id/action_recipeBottomSheet_to_recipesFragment_nav_id"
+            app:destination="@id/recipesFragment_nav_id" />
+    </dialog>
 </navigation>

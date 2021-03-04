@@ -10,7 +10,9 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.tryyourfood.R
 import br.com.tryyourfood.adapter.RecipesAdapter
 import br.com.tryyourfood.databinding.FragmentRecipesBinding
 import br.com.tryyourfood.utils.NetworkResult
@@ -51,6 +53,9 @@ class RecipesFragment : Fragment() {
 
         setupRecyclerView()
         readDatabase()
+        binding.fabRecipesFragmentId.setOnClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.action_recipeBottomSheet_to_recipesFragment_nav_id)
+        })
         return binding.root
     }
 
