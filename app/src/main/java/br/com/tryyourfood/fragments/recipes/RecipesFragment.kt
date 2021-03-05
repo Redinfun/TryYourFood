@@ -54,7 +54,7 @@ class RecipesFragment : Fragment() {
         setupRecyclerView()
         readDatabase()
         binding.fabRecipesFragmentId.setOnClickListener(View.OnClickListener {
-            findNavController().navigate(R.id.action_recipeBottomSheet_to_recipesFragment_nav_id)
+            findNavController().navigate(R.id.action_recipesFragment_nav_id_to_recipeBottomSheet)
         })
         return binding.root
     }
