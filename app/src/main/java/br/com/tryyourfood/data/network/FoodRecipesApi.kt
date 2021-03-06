@@ -1,4 +1,4 @@
-package br.com.tryyourfood
+package br.com.tryyourfood.data.network
 
 import br.com.tryyourfood.model.FoodRecipe
 import retrofit2.Response
