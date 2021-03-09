@@ -10,20 +10,25 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tryyourfood.R
 import br.com.tryyourfood.adapter.RecipesAdapter
 import br.com.tryyourfood.databinding.FragmentRecipesBinding
+import br.com.tryyourfood.listeners.NetworkListener
 import br.com.tryyourfood.utils.NetworkResult
 import br.com.tryyourfood.utils.observeOnce
 import br.com.tryyourfood.viewmodel.MainViewModel
 import br.com.tryyourfood.viewmodel.RecipesViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_recipes.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 @RequiresApi(Build.VERSION_CODES.M)
 class RecipesFragment : Fragment() {
 
@@ -35,6 +40,8 @@ class RecipesFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
+
+    private lateinit var networkListener: NetworkListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +62,45 @@ class RecipesFragment : Fragment() {
         binding.mainViewModel = mainViewModel
 
         setupRecyclerView()
-        readDatabase()
-        binding.fabRecipesFragmentId.setOnClickListener(View.OnClickListener {
-            findNavController().navigate(R.id.action_recipesFragment_nav_id_to_recipeBottomSheet)
-        })
+
+        recipesViewModel.readBackOnline.observe(viewLifecycleOwner) {
+            recipesViewModel.backOnline = it
+        }
+
+        lifecycleScope.launch {
+
+            networkListener = NetworkListener()
+            networkListener.checkNetWorkAvailability(requireContext())
+                .collect { status ->
+                    Log.i("TAG", "onCreateView: " + status.toString())
+                    recipesViewModel.networkStatus = status
+                    if (!status) {
+                        binding.root.fab_recipesFragment_id.setColorFilter(
+                            requireContext().getColor(
+                                R.color.darkblue
+                            )
+                        )
+                    } else {
+                        binding.root.fab_recipesFragment_id.setColorFilter(
+                            requireContext().getColor(
+                                R.color.white
+                            )
+                        )
+                    }
+                    recipesViewModel.showNetworkStatus()
+                    readDatabase()
+                }
+        }
+
+        binding.fabRecipesFragmentId.setOnClickListener {
+            if (recipesViewModel.networkStatus) {
+                findNavController().navigate(R.id.action_recipesFragment_nav_id_to_recipeBottomSheet)
+            } else {
+                recipesViewModel.showNetworkStatus()
+
+            }
+
+        }
         return binding.root
     }
 
@@ -81,7 +123,7 @@ class RecipesFragment : Fragment() {
     private fun requestApiData() {
         Log.i("TAG", "requestApiData: ")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
-        mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
+        mainViewModel.recipesResponse.observe(viewLifecycleOwner) { response ->
 
             when (response) {
                 is NetworkResult.Success -> {
@@ -99,7 +141,7 @@ class RecipesFragment : Fragment() {
                     showShimmerEffect()
                 }
             }
-        })
+        }
     }
 
     private fun loadDataFromCache() {
