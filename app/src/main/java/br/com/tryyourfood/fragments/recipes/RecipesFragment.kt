@@ -66,7 +66,7 @@ class RecipesFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQuery
             recipesViewModel.backOnline = it
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
 
             networkListener = NetworkListener()
             networkListener.checkNetWorkAvailability(requireContext())
