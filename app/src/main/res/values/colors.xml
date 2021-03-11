@@ -22,6 +22,7 @@
     <color name="darkred">#B71C1C</color>
     <color name="purple">#6200EA</color>
     <color name="darkPurple">#5502C8</color>
+    <color name="greenTab">#02AF92</color>
 
     <!-- Custom Chip Style -->
     <color name="checkedChipBackgroundColor">#4DB71C1C</color>

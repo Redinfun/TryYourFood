@@ -22,7 +22,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout_Details_id"
-            android:theme="@style/CustomTabLayoutDetailStyle"
+            style="@style/CustomTabLayoutDetailStyle"
             app:tabTextAppearance="@style/CustomTexTabLayoutDetailStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

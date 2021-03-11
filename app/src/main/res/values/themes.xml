@@ -42,7 +42,9 @@
     </style>
 
     <style name="CustomTabLayoutDetailStyle" parent="Widget.Design.TabLayout">
-        <item name="background">@color/colorPrimaryDark</item>
+        <item name="background">@color/greenTab</item>
+        <item name="backgroundColor">@color/greenTab</item>
+        <item name="backgroundTint">@color/greenTab</item>
         <item name="tabIndicatorColor">@color/white</item>
         <item name="tabIndicatorHeight">2dp</item>
         <item name="tabSelectedTextColor">@color/white</item>
