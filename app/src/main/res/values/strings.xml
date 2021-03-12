@@ -37,5 +37,15 @@
     <string name="ketogenic">Ketogenic</string>
     <string name="glutten_free">Glutten Free</string>
     <string name="apply">Apply</string>
+
+    <!--Search-->
     <string name="search">Search</string>
+
+    <!--Overview Fragment-->
+    <string name="title">Title</string>
+    <string name="vegeterian">Vegeterian</string>
+    <string name="healthy">Healthy</string>
+    <string name="daity_free">Daity Free</string>
+    <string name="cheap">Cheap</string>
+    <string name="description">Description</string>
 </resources>
