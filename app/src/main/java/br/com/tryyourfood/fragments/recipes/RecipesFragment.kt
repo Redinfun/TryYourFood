@@ -3,9 +3,7 @@ package br.com.tryyourfood.fragments.recipes
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -30,7 +28,7 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @RequiresApi(Build.VERSION_CODES.M)
-class RecipesFragment : Fragment() {
+class RecipesFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
     private val args by navArgs<RecipesFragmentArgs>()
 
@@ -61,13 +59,14 @@ class RecipesFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
 
+        setHasOptionsMenu(true)
         setupRecyclerView()
 
         recipesViewModel.readBackOnline.observe(viewLifecycleOwner) {
             recipesViewModel.backOnline = it
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
 
             networkListener = NetworkListener()
             networkListener.checkNetWorkAvailability(requireContext())
@@ -144,13 +143,38 @@ class RecipesFragment : Fragment() {
         }
     }
 
+    private fun searchApiData(searchQuery: String) {
+        showShimmerEffect()
+        mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
+        mainViewModel.searchedRecipesResponse.observe((viewLifecycleOwner)) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    hideShimmer()
+                    val foodRecipe = response.data
+                    foodRecipe?.let {
+                        mAdapter.setData(it)
+                    }
+                }
+                is NetworkResult.Error -> {
+                    hideShimmer()
+                    loadDataFromCache()
+                    Snackbar.make(binding.root, response.message.toString(), Snackbar.LENGTH_SHORT)
+                        .setAnimationMode(Snackbar.ANIMATION_MODE_FADE).show()
+                }
+                is NetworkResult.Loading ->{
+                    showShimmerEffect()
+                }
+            }
+        }
+    }
+
     private fun loadDataFromCache() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+            mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty()) {
                     mAdapter.setData(database[0].foodRecipe)
                 }
-            })
+            }
         }
     }
 
@@ -168,6 +192,31 @@ class RecipesFragment : Fragment() {
         binding.root.shimmer_recyclerView_recipesFragment_id.layoutManager =
             LinearLayoutManager(requireContext())
         showShimmerEffect()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_recipes_search, menu)
+        val search = menu.findItem(R.id.recipes_search_menu_id)
+        val searchView = search.actionView as? androidx.appcompat.widget.SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+        super.onCreateOptionsMenu(menu, inflater)
+
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if(query != null){
+            searchApiData(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

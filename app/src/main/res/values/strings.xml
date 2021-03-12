@@ -9,32 +9,43 @@
     <!-- Recipes fragment -->
     <string name="no_internet_connection_my_young_user">No Internet Connection My Young User</string>
     <string name="vegan">Fit</string>
-        <!--BOTTOMSHEET-->
-        <string name="meal_type">Meal Type</string>
-        <string name="main_course">Main Course</string>
-        <string name="side_dish">Side Dish</string>
-        <string name="dessert">Dessert</string>
-        <string name="appetizer">Appetizer</string>
-        <string name="salad">Salad</string>
-        <string name="bread">Bread</string>
-        <string name="breakfast">Breakfast</string>
-        <string name="soup">Soup</string>
-        <string name="beverage">Beverage</string>
-        <string name="sauce">Sauce</string>
-        <string name="marinade">Marinade</string>
-        <string name="fingerfood">FingerFood</string>
-        <string name="snack">Snack</string>
-        <string name="drink">Drink</string>
-        <string name="diet_type">Diet Type</string>
-        <string name="whole30">Whole30</string>
-        <string name="primal">Primal</string>
-        <string name="paleo">Paleo</string>
-        <string name="pescetarian">Pescetarian</string>
-        <string name="vegana">Vegan</string>
-        <string name="ovo_vegetarian">Ovo-Vegetarian</string>
-        <string name="lacto_vegetarian">Lacto-Vegetarian</string>
-        <string name="vegetarian">Vegetarian</string>
-        <string name="ketogenic">Ketogenic</string>
-        <string name="glutten_free">Glutten Free</string>
+    <!--BOTTOMSHEET-->
+    <string name="meal_type">Meal Type</string>
+    <string name="main_course">Main Course</string>
+    <string name="side_dish">Side Dish</string>
+    <string name="dessert">Dessert</string>
+    <string name="appetizer">Appetizer</string>
+    <string name="salad">Salad</string>
+    <string name="bread">Bread</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="soup">Soup</string>
+    <string name="beverage">Beverage</string>
+    <string name="sauce">Sauce</string>
+    <string name="marinade">Marinade</string>
+    <string name="fingerfood">FingerFood</string>
+    <string name="snack">Snack</string>
+    <string name="drink">Drink</string>
+    <string name="diet_type">Diet Type</string>
+    <string name="whole30">Whole30</string>
+    <string name="primal">Primal</string>
+    <string name="paleo">Paleo</string>
+    <string name="pescetarian">Pescetarian</string>
+    <string name="vegana">Vegan</string>
+    <string name="ovo_vegetarian">Ovo-Vegetarian</string>
+    <string name="lacto_vegetarian">Lacto-Vegetarian</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="ketogenic">Ketogenic</string>
+    <string name="glutten_free">Glutten Free</string>
     <string name="apply">Apply</string>
+
+    <!--Search-->
+    <string name="search">Search</string>
+
+    <!--Overview Fragment-->
+    <string name="title">Title</string>
+    <string name="vegeterian">Vegeterian</string>
+    <string name="healthy">Healthy</string>
+    <string name="daity_free">Daity Free</string>
+    <string name="cheap">Cheap</string>
+    <string name="description">Description</string>
 </resources>

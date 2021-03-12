@@ -1,16 +1,39 @@
 package br.com.tryyourfood.binding_adapter
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import br.com.tryyourfood.R
+import br.com.tryyourfood.fragments.recipes.RecipesFragmentDirections
+import br.com.tryyourfood.model.Result
+import br.com.tryyourfood.utils.Constants.Companion.myLogTag
 import coil.load
+import org.jsoup.Jsoup
 
 class RecipesRowBinding {
 
     companion object {
+
+        @BindingAdapter("onRecipesClickListener")
+        @JvmStatic
+        fun onRecipesClickListener(recipesRowLayout: ConstraintLayout, result: Result) {
+
+            recipesRowLayout.setOnClickListener {
+                try {
+                    val action =
+                        RecipesFragmentDirections.actionRecipesFragmentNavIdToDetailsActivity(result)
+                    recipesRowLayout.findNavController().navigate(action)
+                } catch (e: Exception) {
+                    Log.e(myLogTag(RecipesRowBinding.toString()), "onRecipesClickListener: ")
+                }
+            }
+        }
+
         @BindingAdapter("setNumberOfLikes")
         @JvmStatic
         fun setNumberOfLikes(textView: TextView, likes: Int) {
@@ -49,6 +72,15 @@ class RecipesRowBinding {
 
             }
 
+        }
+
+        @BindingAdapter("parseHtml")
+        @JvmStatic
+        fun parseHtml(textView: TextView, description:String?){
+            if(description != null){
+                val desc = Jsoup.parse(description).text()
+                textView.text = desc
+            }
         }
     }
 

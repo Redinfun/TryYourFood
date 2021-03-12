@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="result"
             type="br.com.tryyourfood.model.Result" />
@@ -11,6 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_recipesRow_layout"
+        onRecipesClickListener="@{result}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -34,10 +36,10 @@
 
                 <ImageView
                     android:id="@+id/image_recipesRow_id"
+                    loadImageFromUrl="@{result.image}"
                     android:layout_width="200dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    loadImageFromUrl="@{result.image}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -70,7 +72,7 @@
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:maxLines="5"
-                    android:text="@{result.summary}"
+                    parseHtml="@{result.summary}"
                     android:textColor="@color/darkGray"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -91,10 +93,10 @@
 
                 <TextView
                     android:id="@+id/qtdLike_itemRecipes_id"
+                    setNumberOfLikes="@{result.aggregateLikes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
-                    setNumberOfLikes="@{result.aggregateLikes}"
                     android:textAlignment="center"
                     android:textColor="@color/red"
                     android:textStyle="bold"
@@ -117,22 +119,22 @@
 
                 <TextView
                     android:id="@+id/qtdTime_itemRecipes_id"
+                    setNumberOfMinutes="@{result.readyInMinutes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    setNumberOfMinutes="@{result.readyInMinutes}"
+                    android:textAlignment="center"
                     android:textColor="@color/yellow"
                     android:textStyle="bold"
-                    android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/qtdLike_itemRecipes_id"
                     app:layout_constraintEnd_toEndOf="@+id/imageView3"
                     app:layout_constraintStart_toStartOf="@+id/imageView3" />
 
                 <ImageView
                     android:id="@+id/imageView4"
+                    applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    applyVeganColor="@{result.vegan}"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                     app:layout_constraintStart_toEndOf="@+id/qtdTime_itemRecipes_id"
                     app:layout_constraintTop_toTopOf="@+id/imageView3"
@@ -142,13 +144,13 @@
 
                 <TextView
                     android:id="@+id/qtdHealth_itemRecipes_id"
+                    applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    applyVeganColor="@{result.vegan}"
                     android:text="@string/vegan"
+                    android:textAlignment="center"
                     android:textColor="@color/darkGray"
                     android:textStyle="bold"
-                    android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/qtdTime_itemRecipes_id"
                     app:layout_constraintEnd_toEndOf="@+id/imageView4"
                     app:layout_constraintHorizontal_bias="0.529"

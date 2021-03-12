@@ -1,13 +1,15 @@
 package br.com.tryyourfood.model
-
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
+@Parcelize
 data class Result(
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,
     @SerializedName("author")
-    val author: String,
+    val author: String?,
     @SerializedName("cheap")
     val cheap: Boolean,
     @SerializedName("cookingMinutes")
@@ -21,7 +23,7 @@ data class Result(
     @SerializedName("dishTypes")
     val dishTypes: List<String>,
     @SerializedName("extendedIngredients")
-    val extendedIngredients: List<ExtendedIngredient>,
+    val extendedIngredients: @RawValue List<ExtendedIngredient>,
     @SerializedName("glutenFree")
     val glutenFree: Boolean,
     @SerializedName("healthScore")
@@ -50,10 +52,8 @@ data class Result(
     val summary: String,
     @SerializedName("title")
     val title: String,
-    @SerializedName("unusedIngredients")
-    val unusedIngredients: List<Any>,
     @SerializedName("usedIngredients")
-    val usedIngredients: List<Any>,
+    val usedIngredients: @RawValue List<Any>,
     @SerializedName("vegan")
     val vegan: Boolean,
     @SerializedName("vegetarian")
@@ -62,4 +62,4 @@ data class Result(
     val veryHealthy: Boolean,
     @SerializedName("veryPopular")
     val veryPopular: Boolean
-)
+) : Parcelable
