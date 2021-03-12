@@ -48,4 +48,11 @@
     <string name="daity_free">Daity Free</string>
     <string name="cheap">Cheap</string>
     <string name="description">Description</string>
+
+    <!--Ingredients Fragment-->
+    <string name="grams">Grams</string>
+    <string name="consistency">Consistency</string>
+    <string name="original_ingredient">Original Ingredient</string>
+
+
 </resources>
