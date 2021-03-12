@@ -13,6 +13,7 @@ import br.com.tryyourfood.fragments.recipes.RecipesFragmentDirections
 import br.com.tryyourfood.model.Result
 import br.com.tryyourfood.utils.Constants.Companion.myLogTag
 import coil.load
+import org.jsoup.Jsoup
 
 class RecipesRowBinding {
 
@@ -71,6 +72,15 @@ class RecipesRowBinding {
 
             }
 
+        }
+
+        @BindingAdapter("parseHtml")
+        @JvmStatic
+        fun parseHtml(textView: TextView, description:String?){
+            if(description != null){
+                val desc = Jsoup.parse(description).text()
+                textView.text = desc
+            }
         }
     }
 

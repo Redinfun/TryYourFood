@@ -72,7 +72,7 @@
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:maxLines="5"
-                    android:text="@{result.summary}"
+                    parseHtml="@{result.summary}"
                     android:textColor="@color/darkGray"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"

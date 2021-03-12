@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import br.com.tryyourfood.R
 import br.com.tryyourfood.model.Result
 import coil.load
+import kotlinx.android.synthetic.main.fragment_overview.*
 import kotlinx.android.synthetic.main.fragment_overview.view.*
+import org.jsoup.Jsoup
 
 class OverviewFragment : Fragment() {
 
@@ -27,7 +30,7 @@ class OverviewFragment : Fragment() {
         view.title_textView_overview_id.text = myBundle?.title
         view.qtdLike_overview_id.text = myBundle?.aggregateLikes.toString()
         view.qtdTime_overview_id.text = myBundle?.readyInMinutes.toString()
-        view.summary_overview_id.text = myBundle?.summary
+        parseHtml(view.summary_overview_id,myBundle?.summary)
 
         if (myBundle?.vegetarian == true) {
             view.vegeterian_imageView_overview_id.setColorFilter(
@@ -123,6 +126,13 @@ class OverviewFragment : Fragment() {
 
 
         return view
+    }
+
+    fun parseHtml(textView: TextView, description:String?){
+        if(description != null){
+            val desc = Jsoup.parse(description).text()
+            textView.text = desc
+        }
     }
 
 }
