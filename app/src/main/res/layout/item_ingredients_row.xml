@@ -55,6 +55,7 @@
                 android:textColor="@color/darker"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:padding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/whiteBackground_itemIngredients_id"
                 app:layout_constraintTop_toTopOf="@+id/whiteBackground_itemIngredients_id" />
