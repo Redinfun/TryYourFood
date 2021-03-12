@@ -11,6 +11,7 @@ import br.com.tryyourfood.utils.Constants.Companion.BASE_IMAGE_URL
 import br.com.tryyourfood.utils.RecipesDiffUtil
 import coil.load
 import kotlinx.android.synthetic.main.item_ingredients_row.view.*
+import java.util.*
 
 class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>() {
 
@@ -27,12 +28,22 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val ingredient = ingredientsList.get(position)
-        holder.itemView.imageView_itemIngredients_id.load(BASE_IMAGE_URL + ingredient.image)
-        holder.itemView.titleTextView_itemIngredients_id.text = ingredient.name
+        holder.itemView.imageView_itemIngredients_id.load(BASE_IMAGE_URL + ingredient.image) {
+            crossfade(600)
+            error(R.drawable.error_placeholder)
+        }
+        holder.itemView.titleTextView_itemIngredients_id.text =
+            ingredient.name?.capitalize(Locale.ROOT)
         holder.itemView.amountTextView_itemIngredients_id.text = ingredient.amount.toString()
-        holder.itemView.unitTextView_itemIngredients_id.text = ingredient.unit
-        holder.itemView.consistecyTextView_itemIngredients_id.text = ingredient.consistency
-        holder.itemView.originalTextView_itemIngredients_id.text = ingredient.original
+        holder.itemView.unitTextView_itemIngredients_id.text =
+            ingredient.unit?.capitalize(Locale.ROOT)
+        holder.itemView.consistecyTextView_itemIngredients_id.text =
+            ingredient.consistency?.capitalize(
+                Locale.ROOT
+            )
+        holder.itemView.originalTextView_itemIngredients_id.text = ingredient.original?.capitalize(
+            Locale.ROOT
+        )
 
     }
 

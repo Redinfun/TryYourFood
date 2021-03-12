@@ -4,12 +4,15 @@ package br.com.tryyourfood.utils
 class Constants {
 
     companion object {
-        //apontamento para API
+        //Apontamento para API
         const val BASE_URL = "https://api.spoonacular.com"
         const val BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
 
-        //chave de api
+        //Chave de api
         const val API_KEY = "45334d825076402ba6ff877e8ef65cd6"
+
+        //Bundle Fragments Keys
+        const val RECIPE_BUNDLE_KEY = "recipeBundle"
 
         //Api query keys
         const val QUERY_SEARCH = "query"
@@ -36,7 +39,7 @@ class Constants {
         const val PREFERENCES_BACK_ONLINE = "backOnline"
 
         //Tag to logs
-        fun myLogTag(className:String) : String{
+        fun myLogTag(className: String): String {
             return className::class.java.canonicalName
         }
     }

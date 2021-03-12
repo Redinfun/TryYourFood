@@ -11,6 +11,7 @@ import br.com.tryyourfood.adapter.PageAdapter
 import br.com.tryyourfood.fragments.ingredients.IngredientsFragment
 import br.com.tryyourfood.fragments.instructions.InstructionsFragment
 import br.com.tryyourfood.fragments.overview.OverviewFragment
+import br.com.tryyourfood.utils.Constants.Companion.RECIPE_BUNDLE_KEY
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class DetailsActivity : AppCompatActivity() {
         titles.add("Instructions")
 
         val resultBundle = Bundle()
-        resultBundle.putParcelable("recipeBundle", args.result)
+        resultBundle.putParcelable(RECIPE_BUNDLE_KEY, args.result)
 
         val adapter = PageAdapter(
             resultBundle,
