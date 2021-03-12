@@ -41,8 +41,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/imageRecipe_overview_id"
             app:layout_constraintEnd_toEndOf="@+id/gradient_overlayView_overview_id"
             app:layout_constraintTop_toTopOf="@+id/gradient_overlayView_overview_id"
-            app:srcCompat="@drawable/ic_favorite_black"
-            app:tint="@color/red" />
+            app:srcCompat="@drawable/ic_favorite_nav"
+             />
 
         <TextView
             android:id="@+id/qtdLike_overview_id"
@@ -52,7 +52,7 @@
             android:padding="2dp"
             android:text="100"
             android:textAlignment="center"
-            android:textColor="@color/red"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageRecipe_overview_id"
             app:layout_constraintEnd_toEndOf="@+id/heart_imageView_overview_id"
