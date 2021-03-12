@@ -72,7 +72,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/titleTextView_itemIngredients_id" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/unitTextView_itemIngredients_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
