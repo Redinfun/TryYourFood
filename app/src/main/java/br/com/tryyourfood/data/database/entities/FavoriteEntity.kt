@@ -8,6 +8,6 @@ import br.com.tryyourfood.utils.Constants.Companion.FAVORITES_TABLE_NAME
 @Entity(tableName = FAVORITES_TABLE_NAME)
 class FavoriteEntity(
     @PrimaryKey(autoGenerate = true)
-    var id: Int?,
-    var result: Result?
+    var id: Int,
+    var result: Result
 )

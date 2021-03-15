@@ -54,5 +54,8 @@
     <string name="consistency">Consistency</string>
     <string name="original_ingredient">Original Ingredient</string>
 
+    <!--Favorite Menu-->
+    <string name="favorite">Favorite</string>
+
 
 </resources>
