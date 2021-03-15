@@ -1,16 +1,40 @@
 package br.com.tryyourfood.data
 
 import br.com.tryyourfood.data.database.dao.RecipesDao
+import br.com.tryyourfood.data.database.entities.FavoriteEntity
 import br.com.tryyourfood.data.database.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(private val recipesDao: RecipesDao) {
-    fun readDatabase(): Flow<List<RecipesEntity>>{
+
+    //RecipesDao
+
+    fun readRecipes(): Flow<List<RecipesEntity>> {
         return recipesDao.readRecipes()
     }
 
-    suspend fun insertRecipes(recipesEntity: RecipesEntity){
+    suspend fun insertRecipes(recipesEntity: RecipesEntity) {
         recipesDao.insertRecipe(recipesEntity)
     }
+
+    // FavoritesDao
+
+    fun readFavoritesRecipes(): Flow<List<FavoriteEntity>> {
+        return recipesDao.readFavoriteRecipes()
+    }
+
+    suspend fun insertFavoriteRecipe(favoriteEntity: FavoriteEntity) {
+        recipesDao.insertFavoriteRecipe(favoriteEntity)
+    }
+
+    suspend fun deleteFavoriteRecipe(favoriteEntity: FavoriteEntity) {
+        recipesDao.deleteFavorite(favoriteEntity)
+    }
+
+    suspend fun deleteAllFavoriteRecipe() {
+        recipesDao.deleteAllFavoriteRecipes()
+    }
+
+
 }
