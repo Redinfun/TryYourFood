@@ -1,12 +1,14 @@
 package br.com.tryyourfood.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.navigation.navArgs
 import br.com.tryyourfood.R
 import br.com.tryyourfood.adapter.PageAdapter
@@ -15,11 +17,13 @@ import br.com.tryyourfood.fragments.ingredients.IngredientsFragment
 import br.com.tryyourfood.fragments.instructions.InstructionsFragment
 import br.com.tryyourfood.fragments.overview.OverviewFragment
 import br.com.tryyourfood.utils.Constants.Companion.RECIPE_BUNDLE_KEY
+import br.com.tryyourfood.utils.Constants.Companion.myLogTag
 import br.com.tryyourfood.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_details.*
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
     private val args by navArgs<DetailsActivityArgs>()
@@ -59,7 +63,23 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_favorite_recipe, menu)
+        val menuItem = menu?.findItem(R.id.save_favorite_menu_id)
+        checkSavedRecipes(menuItem!!)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun checkSavedRecipes(menuItem: MenuItem) {
+        mainViewModel.readFavoriteRecipes.observe(this) { favoritesEntity ->
+            try {
+                for (savedRecipe in favoritesEntity) {
+                    if (savedRecipe.result.recipeId == args.result.recipeId) {
+                        changeMenuItemColor(menuItem, R.color.yellow)
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e(myLogTag(DetailsActivity::class.java.canonicalName), "checkSavedRecipes: ",)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
