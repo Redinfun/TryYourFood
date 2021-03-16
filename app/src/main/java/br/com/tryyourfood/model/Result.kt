@@ -29,6 +29,8 @@ data class Result(
     @SerializedName("healthScore")
     val healthScore: Double,
     @SerializedName("id")
+    val id: Int,
+    @SerializedName("recipeId")
     val recipeId: Int,
     @SerializedName("image")
     val image: String,
