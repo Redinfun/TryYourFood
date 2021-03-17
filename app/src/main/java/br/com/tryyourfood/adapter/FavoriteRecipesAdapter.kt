@@ -2,11 +2,14 @@ package br.com.tryyourfood.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import br.com.tryyourfood.data.database.entities.FavoriteEntity
 import br.com.tryyourfood.databinding.ItemFavoriteRecipesRowBinding
+import br.com.tryyourfood.fragments.favorite.FavoriteRecipesFragmentDirections
 import br.com.tryyourfood.utils.RecipesDiffUtil
+import kotlinx.android.synthetic.main.item_favorite_recipes_row.view.*
 
 class FavoriteRecipesAdapter : RecyclerView.Adapter<FavoriteRecipesAdapter.MyViewHolder>() {
     private var favoritesList = emptyList<FavoriteEntity>()
@@ -18,6 +21,16 @@ class FavoriteRecipesAdapter : RecyclerView.Adapter<FavoriteRecipesAdapter.MyVie
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val selectedRecipe = favoritesList.get(position)
         holder.bind(selectedRecipe)
+
+        /* OnClickListener */
+        holder.itemView.item_favoritesRow_layout.setOnClickListener {
+            val action =
+                FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentNavIdToDetailsActivity(
+                    selectedRecipe.result
+                )
+            holder.itemView.findNavController().navigate(action)
+
+        }
     }
 
     override fun getItemCount(): Int {
