@@ -10,6 +10,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.tryyourfood.adapter.FavoriteRecipesAdapter
+import br.com.tryyourfood.data.database.entities.FavoriteEntity
 import br.com.tryyourfood.databinding.FragmentFavoriteRecipesBinding
 import br.com.tryyourfood.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +24,8 @@ class FavoriteRecipesFragment : Fragment() {
 
     private var _binding: FragmentFavoriteRecipesBinding? = null
     private val binding get() = _binding!!
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

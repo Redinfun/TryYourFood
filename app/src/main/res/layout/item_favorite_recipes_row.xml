@@ -20,6 +20,7 @@
         android:layout_marginBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCard_favoriteRow_layout_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"

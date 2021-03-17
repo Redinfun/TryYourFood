@@ -34,5 +34,6 @@
     <color name="statusBarColor">@color/greenTab</color>
     <color name="contextualStatusBarColor">@color/darker</color>
     <color name="contextualBackgroundColorActionBar">@color/dark</color>
+    <color name="backgroundCardColor">#8000897B</color>
 
 </resources>
