@@ -13,6 +13,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </WebView>
+
+    <ImageView
+        android:id="@+id/imageView_noConnection_Ingredients_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/error_placeholder"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/instructionsWebView_id"
+        app:layout_constraintEnd_toEndOf="@+id/instructionsWebView_id"
+        app:layout_constraintStart_toStartOf="@+id/instructionsWebView_id"
+        app:layout_constraintTop_toTopOf="@+id/instructionsWebView_id" />
+
+    <TextView
+        android:id="@+id/textView_noConnection_Ingredients_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:text="@string/no_internet_connection_my_young_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_noConnection_Ingredients_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
