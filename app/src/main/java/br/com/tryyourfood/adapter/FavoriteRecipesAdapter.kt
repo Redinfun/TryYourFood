@@ -84,6 +84,6 @@ class FavoriteRecipesAdapter(private val requireActivity: FragmentActivity) :
     }
 
     override fun onDestroyActionMode(actionMode: ActionMode?) {
-        return true
+
     }
 }
