@@ -86,11 +86,11 @@ class FavoriteRecipesAdapter(
     private fun applySelection(holder: MyViewHolder, currentRecipe: FavoriteEntity) {
         if (favoriteListSelected.contains(currentRecipe)) {
             favoriteListSelected.remove(currentRecipe)
-            changeRecipeStyle(holder, R.color.white, R.color.lightMediumGray)
+            changeRecipeStyle(holder, R.color.white, R.color.lightMediumGray, 1)
             applyActionModeTitle()
         } else {
             favoriteListSelected.add(currentRecipe)
-            changeRecipeStyle(holder, R.color.white, R.color.colorPrimaryDark)
+            changeRecipeStyle(holder, R.color.white, R.color.colorPrimaryDark, 3)
             applyActionModeTitle()
         }
     }
@@ -110,13 +110,20 @@ class FavoriteRecipesAdapter(
         }
     }
 
-    private fun changeRecipeStyle(holder: MyViewHolder, backgroundColor: Int, strokeColor: Int) {
-        holder.itemView.materialCard_favoriteRow_layout_id.setBackgroundColor(
+    private fun changeRecipeStyle(
+        holder: MyViewHolder,
+        backgroundColor: Int,
+        strokeColor: Int,
+        strokeWidth: Int
+    ) {
+        holder.itemView.item_favoritesRow_layout.setBackgroundColor(
             ContextCompat.getColor(requireActivity, backgroundColor)
         )
 
         holder.itemView.materialCard_favoriteRow_layout_id.strokeColor =
             ContextCompat.getColor(requireActivity, strokeColor)
+
+        holder.itemView.materialCard_favoriteRow_layout_id.strokeWidth = strokeWidth
     }
 
     class MyViewHolder(private val binding: ItemFavoriteRecipesRowBinding) :
@@ -152,9 +159,9 @@ class FavoriteRecipesAdapter(
                 mainViewModel.deleteFavoriteRecipe(it)
             }
             if (favoriteListSelected.size == 1) {
-                showSnackBar("${favoriteListSelected.size} Recipe removed!")
+                showSnackBar("${favoriteListSelected.size} Recipe Removed!")
             } else {
-                showSnackBar("${favoriteListSelected.size} Recipes removed!")
+                showSnackBar("${favoriteListSelected.size} Recipes Removed!")
             }
 
             multiSelection = false
@@ -167,8 +174,7 @@ class FavoriteRecipesAdapter(
 
     override fun onDestroyActionMode(actionMode: ActionMode?) {
         myViewHolders.forEach { holder ->
-            changeRecipeStyle(holder, R.color.white, R.color.lightMediumGray)
-
+            changeRecipeStyle(holder, R.color.white, R.color.lightMediumGray, 1)
         }
         multiSelection = false
         favoriteListSelected.clear()
@@ -178,12 +184,18 @@ class FavoriteRecipesAdapter(
     private fun showSnackBar(message: String) {
         Snackbar.make(
             rootView, message, Snackbar.LENGTH_SHORT
-        ).setAction("Okay") {}.setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE)
+        ).setAction("Okay") {}.setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
             .show()
     }
 
     private fun applyStatusBarColor(color: Int) {
         requireActivity.window.statusBarColor =
             ContextCompat.getColor(requireActivity, color)
+    }
+
+    fun clearContextualActionMode() {
+        if (this::mActionMode.isInitialized) {
+            mActionMode.finish()
+        }
     }
 }
