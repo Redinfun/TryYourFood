@@ -90,7 +90,7 @@ class FavoriteRecipesAdapter(
             applyActionModeTitle()
         } else {
             favoriteListSelected.add(currentRecipe)
-            changeRecipeStyle(holder, R.color.white, R.color.colorPrimaryDark, 3)
+            changeRecipeStyle(holder, R.color.white, R.color.colorPrimaryDark, 5)
             applyActionModeTitle()
         }
     }
