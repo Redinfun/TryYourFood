@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import br.com.tryyourfood.data.database.entities.FavoriteEntity
+import br.com.tryyourfood.data.database.entities.FoodJokeEntity
 import br.com.tryyourfood.data.database.entities.RecipesEntity
 import br.com.tryyourfood.data.repository.Repository
 import br.com.tryyourfood.model.FoodJoke
@@ -28,8 +29,8 @@ class MainViewModel @ViewModelInject constructor(
     val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData()
     val readFavoriteRecipes: LiveData<List<FavoriteEntity>> =
         repository.local.readFavoritesRecipes().asLiveData()
-    val foodJokeResponse: MutableLiveData<NetworkResult<FoodJoke>> = MutableLiveData()
-
+    val readFoodJoke: LiveData<List<FoodJokeEntity>> =
+        repository.local.readDataFoodJoke().asLiveData()
 
     private fun insertRecipe(recipesEntity: RecipesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
@@ -39,6 +40,11 @@ class MainViewModel @ViewModelInject constructor(
     fun insertFavoriteRecipe(favoriteEntity: FavoriteEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertFavoriteRecipe(favoriteEntity)
+        }
+
+    fun insertFoodJoke(foodJokeEntity: FoodJokeEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.insertFoodJoke(foodJokeEntity)
         }
 
     fun deleteFavoriteRecipe(favoriteEntity: FavoriteEntity) =
@@ -55,6 +61,7 @@ class MainViewModel @ViewModelInject constructor(
     /* RETROFIT ONLINE */
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
     var searchedRecipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
+    val foodJokeResponse: MutableLiveData<NetworkResult<FoodJoke>> = MutableLiveData()
 
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)
@@ -114,6 +121,10 @@ class MainViewModel @ViewModelInject constructor(
                 val response = repository.remote.getFoodJoke(apiKey)
                 foodJokeResponse.value = handleFoodJokeResponse(response)
 
+                val foodJoke = foodJokeResponse.value!!.data
+                if (foodJoke != null) {
+                    offlineCacheFoodJoke(foodJoke)
+                }
             } catch (e: Exception) {
                 foodJokeResponse.value = NetworkResult.Error("No Internet Connection")
             }
@@ -125,6 +136,11 @@ class MainViewModel @ViewModelInject constructor(
     private fun offlineCacheRecipes(foodRecipe: FoodRecipe) {
         val recipesEntity = RecipesEntity(foodRecipe)
         insertRecipe(recipesEntity)
+    }
+
+    private fun offlineCacheFoodJoke(foodJoke: FoodJoke) {
+        val foodJokeEntity = FoodJokeEntity(foodJoke)
+        insertFoodJoke(foodJokeEntity)
     }
 
     private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe> {

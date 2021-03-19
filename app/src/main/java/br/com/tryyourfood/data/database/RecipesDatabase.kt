@@ -5,11 +5,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import br.com.tryyourfood.data.database.dao.RecipesDao
 import br.com.tryyourfood.data.database.entities.FavoriteEntity
+import br.com.tryyourfood.data.database.entities.FoodJokeEntity
 import br.com.tryyourfood.data.database.entities.RecipesEntity
 import br.com.tryyourfood.utils.RecipesTypeConverter
 
 @Database(
-    entities = [RecipesEntity::class, FavoriteEntity::class],
+    entities = [RecipesEntity::class, FavoriteEntity::class, FoodJokeEntity::class],
     version = 1,
     exportSchema = true
 )
