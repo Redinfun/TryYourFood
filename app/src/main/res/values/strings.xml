@@ -60,5 +60,7 @@
     <string name="delete_favorite_recipe">Delete favorite recipe</string>
     <string name="delete_all_favorites_recipes">Delete All Favorites Recipes</string>
 
+    <!-- Food Joke -->
+
 
 </resources>
