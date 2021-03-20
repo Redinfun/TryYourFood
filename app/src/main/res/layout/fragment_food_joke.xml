@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="mainViewModel"
             type="br.com.tryyourfood.viewmodel.MainViewModel" />
@@ -17,12 +18,12 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/foodJoke_CardView_fragment_id"
+            readApiResponseJoke="@{mainViewModel.foodJokeResponse}"
+            readDatabaseJoke="@{mainViewModel.readFoodJoke}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            readApiResponseJoke="@{mainViewModel.foodJokeResponse}"
-            readDatabaseJoke="@{mainViewModel.readFoodJoke}"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,8 +47,8 @@
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/courgette"
                     android:padding="4dp"
-                    android:textIsSelectable="true"
                     android:text="@string/food_joke"
+                    android:textIsSelectable="true"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -60,16 +61,18 @@
         <ProgressBar
             android:id="@+id/progressBar_foodJoke_fragment_id"
             style="?android:attr/progressBarStyle"
+            readApiResponseJoke="@{mainViewModel.foodJokeResponse}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            readApiResponseJoke="@{mainViewModel.foodJokeResponse}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imageView_foodJoke_fragment_id"
+            apiResponseErrorJoke="@{mainViewModel.foodJokeResponse}"
+            readDatabaseErrorJoke="@{mainViewModel.readFoodJoke}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:alpha="0.5"
@@ -83,12 +86,14 @@
 
         <TextView
             android:id="@+id/error_textView_foodJoke_fragment_id"
+            apiResponseErrorJoke="@{mainViewModel.foodJokeResponse}"
+            readDatabaseErrorJoke="@{mainViewModel.readFoodJoke}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:alpha="0.5"
-            android:textIsSelectable="true"
             android:text="@string/no_internet_connection_my_young_user"
+            android:textIsSelectable="true"
             android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="gone"

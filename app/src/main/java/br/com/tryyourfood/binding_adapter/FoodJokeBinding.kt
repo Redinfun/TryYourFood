@@ -2,6 +2,7 @@ package br.com.tryyourfood.binding_adapter
 
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import br.com.tryyourfood.data.database.entities.FoodJokeEntity
 import br.com.tryyourfood.model.FoodJoke
@@ -55,6 +56,25 @@ class FoodJokeBinding {
                         }
                     }
                 }
+            }
+        }
+
+        @BindingAdapter("apiResponseErrorJoke","readDatabaseErrorJoke",requireAll = false)
+        @JvmStatic
+        fun setErrorViewsVisibility(view: View,apiResponse:NetworkResult<FoodJoke>?,database: List<FoodJokeEntity>?){
+            if (database != null ){
+                if(database.isEmpty()){
+                    view.visibility = View.VISIBLE
+                    if(view is TextView){
+                        if(apiResponse != null){
+                            view.text = apiResponse.message.toString()
+                        }
+                    }
+                }
+            }
+
+            if(apiResponse is NetworkResult.Success){
+                view.visibility = View.GONE
             }
         }
     }

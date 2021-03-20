@@ -105,8 +105,8 @@ class RecipesFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQuery
 
     private fun readDatabase() {
 
-        lifecycleScope.launch {
-            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
+        lifecycleScope.launchWhenStarted {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty() && !args.backToRecipeFragment) {
                     mAdapter.setData(database[0].foodRecipe)
                     hideShimmer()
@@ -114,7 +114,7 @@ class RecipesFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQuery
                 } else {
                     requestApiData()
                 }
-            })
+            }
         }
     }
 

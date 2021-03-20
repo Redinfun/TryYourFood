@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
 import androidx.navigation.navArgs
 import br.com.tryyourfood.R
 import br.com.tryyourfood.adapter.PageAdapter
@@ -18,6 +17,7 @@ import br.com.tryyourfood.fragments.instructions.InstructionsFragment
 import br.com.tryyourfood.fragments.overview.OverviewFragment
 import br.com.tryyourfood.utils.Constants.Companion.RECIPE_BUNDLE_KEY
 import br.com.tryyourfood.utils.Constants.Companion.myLogTag
+import br.com.tryyourfood.utils.observeOnce
 import br.com.tryyourfood.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,7 +75,8 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun checkSavedRecipes(menuItem: MenuItem) {
-        mainViewModel.readFavoriteRecipes.observe(this) { favoritesEntity ->
+        mainViewModel.readFavoriteRecipes.observeOnce(this, { favoritesEntity ->
+
             try {
                 for (savedRecipe in favoritesEntity) {
                     if (savedRecipe.result.id == args.result.id) {
@@ -87,7 +88,7 @@ class DetailsActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Log.e(myLogTag(DetailsActivity::class.java.canonicalName), "checkSavedRecipes: ",)
             }
-        }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

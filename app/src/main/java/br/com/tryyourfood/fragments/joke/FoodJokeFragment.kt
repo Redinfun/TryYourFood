@@ -43,7 +43,7 @@ class FoodJokeFragment : Fragment() {
                 }
                 is NetworkResult.Error -> {
                     Snackbar.make(binding.root, response.message.toString(), Snackbar.LENGTH_SHORT)
-                        .setAction("Okay") {}.show()
+                        .show()
 
                     loadDataFromCache()
                 }

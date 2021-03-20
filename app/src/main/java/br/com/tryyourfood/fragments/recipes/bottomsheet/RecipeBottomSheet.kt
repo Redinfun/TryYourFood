@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import br.com.tryyourfood.R
 import br.com.tryyourfood.utils.Constants.Companion.DEFAULT_DIET_TYPE
@@ -43,13 +44,13 @@ class RecipeBottomSheet : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_bottom_sheet, container, false)
 
-        recipesViewModel.readMealAndDietType.asLiveData().observe(viewLifecycleOwner,{value ->
+        recipesViewModel.readMealAndDietType.asLiveData().observe(viewLifecycleOwner) { value ->
             mealTypeChip = value.selectedMealType
             dietTypeChip = value.selectedDietType
 
             updateMealChip(value.selectedMealTypeId,mView.mealType_chipGroup_id)
             updateDietChip(value.selectedDietTypeId,mView.dietType_chipGroup_id)
-        })
+        }
 
         mView.mealType_chipGroup_id.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
