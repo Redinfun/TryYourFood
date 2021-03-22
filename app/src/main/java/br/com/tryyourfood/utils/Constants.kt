@@ -32,7 +32,7 @@ class Constants {
 
         //Bottom Sheet and Preferences
         const val PREFERENCES_NAME = "food_preferences"
-        const val DEFAULT_MEAL_TYPE = "snack"
+        const val DEFAULT_MEAL_TYPE = "main course"
         const val DEFAULT_DIET_TYPE = "ketogenic"
         const val DEFAULT_RECIPES_NUMBER = "50"
         const val PREFERENCES_MEAL_TYPE = "mealType"

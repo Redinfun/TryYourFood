@@ -66,7 +66,7 @@ class RecipesFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQuery
             recipesViewModel.backOnline = it
         }
 
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launchWhenStarted  {
 
             networkListener = NetworkListener()
             networkListener.checkNetWorkAvailability(requireContext())
@@ -106,7 +106,7 @@ class RecipesFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQuery
     private fun readDatabase() {
 
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty() && !args.backToRecipeFragment) {
                     mAdapter.setData(database[0].foodRecipe)
                     hideShimmer()

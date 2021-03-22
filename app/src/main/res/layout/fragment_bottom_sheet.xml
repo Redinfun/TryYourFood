@@ -188,7 +188,7 @@
                 android:id="@+id/dietType_chipGroup_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:checkedChip="@id/gluttenFree_diet_chip_sheet_id"
+                app:checkedChip="@id/ketogenic_diet_chip_sheet_id"
                 app:selectionRequired="true"
                 app:singleLine="true"
                 app:singleSelection="true">
