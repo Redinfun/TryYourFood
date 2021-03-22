@@ -105,7 +105,7 @@ class RecipesFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQuery
 
     private fun readDatabase() {
 
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launch {
             mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty() && !args.backToRecipeFragment) {
                     mAdapter.setData(database[0].foodRecipe)

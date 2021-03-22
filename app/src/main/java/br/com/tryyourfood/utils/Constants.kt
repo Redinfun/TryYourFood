@@ -9,7 +9,8 @@ class Constants {
         const val BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
 
         //Chave de api
-        const val API_KEY = "45334d825076402ba6ff877e8ef65cd6"
+        //const val API_KEY = "45334d825076402ba6ff877e8ef65cd6"
+        const val API_KEY = "4493f2aa86024156b606a0ebb86e5016"
 
         //Bundle Fragments Keys
         const val RECIPE_BUNDLE_KEY = "recipeBundle"
