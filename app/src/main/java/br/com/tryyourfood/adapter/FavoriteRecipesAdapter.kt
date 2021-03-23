@@ -43,6 +43,8 @@ class FavoriteRecipesAdapter(
         val selectedRecipe = favoritesList.get(position)
         holder.bind(selectedRecipe)
 
+        saveItemStateOnScroll(selectedRecipe,holder)
+
         /* OnClickListener */
         holder.itemView.item_favoritesRow_layout.setOnClickListener {
             if (multiSelection) {
@@ -65,8 +67,8 @@ class FavoriteRecipesAdapter(
                 applySelection(holder, selectedRecipe)
                 true
             } else {
-                multiSelection = false
-                false
+                applySelection(holder, selectedRecipe)
+                true
             }
         }
 
@@ -95,10 +97,19 @@ class FavoriteRecipesAdapter(
         }
     }
 
+    private fun saveItemStateOnScroll(currentRecipe: FavoriteEntity,holder:MyViewHolder){
+        if(favoriteListSelected.contains(currentRecipe)){
+            changeRecipeStyle(holder,R.color.backgroundCardColor,R.color.colorPrimaryDark, 5)
+        }else{
+            changeRecipeStyle(holder, R.color.white, R.color.lightMediumGray, 1)
+        }
+    }
+
     private fun applyActionModeTitle() {
         when (favoriteListSelected.size) {
             0 -> {
                 mActionMode.finish()
+                multiSelection = false
             }
 
             1 -> {
